@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1542117418 source:c:\users\pet_user\documents\treecpp\src\no.cpp
+	<iostream>
+	"No.h"
+
+1542117405 c:\users\pet_user\documents\treecpp\include\no.h
+
+1542117691 source:c:\users\pet_user\documents\treecpp\src\tree.cpp
+	"Tree.h"
+	<iostream>
+	"No.h"
+
+1542117542 c:\users\pet_user\documents\treecpp\include\tree.h
+	"No.h"
+
+1542117949 source:c:\users\pet_user\documents\treecpp\main.cpp
+	<iostream>
+	<stdlib.h>
+	"No.h"
+	"Tree.h"
+
+1542366847 source:c:\users\gabriel marques\documents\ed1\treecpp\main.cpp
+	<iostream>
+	<stdlib.h>
+	"No.h"
+	"Tree.h"
+
+1542366847 c:\users\gabriel marques\documents\ed1\treecpp\include\no.h
+
+1542366847 c:\users\gabriel marques\documents\ed1\treecpp\include\tree.h
+	"No.h"
+
+1542366847 source:c:\users\gabriel marques\documents\ed1\treecpp\src\no.cpp
+	<iostream>
+	"No.h"
+
+1542366847 source:c:\users\gabriel marques\documents\ed1\treecpp\src\tree.cpp
+	"Tree.h"
+	<iostream>
+	"No.h"
+
