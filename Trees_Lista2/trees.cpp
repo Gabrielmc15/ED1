@@ -174,6 +174,32 @@ int ocorrencias(No* no, int n){           ///funçao da atividade: questao 4
 }
 
 ///fixaçao 2
+int abIsFullAux(No* no, int full){
+    if(full != 0 && no != NULL){
+        abIsFullAux(no->esq, full);
+        if((no->dir != NULL && no->esq != NULL) || (no->dir == NULL && no->esq == NULL)){
+            full = 1;
+        }else full = 0;
+        abIsFullAux(no->dir,full);
+    }else return full;
+}
+int abIsFull (No* no){
+    if(no != NULL){
+        int full;
+        if(no->esq != NULL && no->dir != NULL)
+            full = 1;
+        else full = 0;
+        return abIsFullAux(no, full);
+    }
+}
+
+int abpNumNodesHeightH(No* no){
+    if (no == NULL)
+        return 0;
+    int nleft = abpNumNodesHeightH(no->esq);
+    int nright = abpNumNodesHeightH(no->dir);
+    return (nleft + nright + 1);
+}
 
 int addInv(No *no, int n){
     if(no != NULL){

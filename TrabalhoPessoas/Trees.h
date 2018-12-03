@@ -1,8 +1,16 @@
 using namespace std;
 
-///struct do no com o dado como inteiro e dois ponteiros um para a esquerda e outro para a direita
+typedef struct _Data_{
+    int dia;
+    int mes;
+    int ano;
+}Data;
 typedef struct _No_{
-    int dado;
+    //nome, matrícula, data de entrada e data de saida
+    string nome;
+    int matricula;
+    Data entrada; // vai ser struct
+    Data saida; // vai ser struct
     _No_ *esq, *dir, *pai;
 }No;
 
@@ -23,7 +31,7 @@ No *criarNo(int n)- cria uma arvore
 @param n- inteiro que sera a raiz da arvore
 @return uma arvore alocada
 */
-No *criarNo(int n);
+No *criarNo(string nome, int matricula, Data entrada, Data saida);
 
 /**
 int add(No* no, int n)- adiciona um dado em uma arvore ja alocada
@@ -31,13 +39,13 @@ int add(No* no, int n)- adiciona um dado em uma arvore ja alocada
 @param n-o dado que sera adicionado na arvore
 @return- 1 sucesso, 0 falha
 */
-int add(No *no, int n);
+int add(No *no, string nome, int matricula, Data entrada, Data saida);
 
 /**
 void emOrdem(No* no)- imprime a arvore em ordem crescente
 @param *no- a arvore que deseja imprimir
 */
-void emOrdem(No* no);
+//void emOrdem(No* no);
 
 /**
 No *minimo(No* no)- retorna o menor dado da arvore(ultimo a esquerda)
@@ -59,7 +67,7 @@ int remover(No* no, int n)- remove o dado da arvore
 @param n- dado a ser removido
 @return- 1 sucesso, 0 falha
 */
-int remover(No* no, int n);
+//int remover(No* no, int n);
 
 /**
 No *busca(No* no, int n)-funcao de busca na arvore
@@ -67,46 +75,16 @@ No *busca(No* no, int n)-funcao de busca na arvore
 @param n- o valor que deseja buscar
 @return- o no com o dado da busca em caso de sucesso, NULL em caso de falha
 */
-No *busca(No* no,int n);
-
-Lista* listaArvore(No* no);
-
-void listaArvoreAux(No* no, Lista* lista);
+No *buscaMatricula(No* no,int matricula);
 
 ///funcoes das atividades//////////////////////////////////////////////////////
 
-void imprimeFolhas(No* no);
+//void imprimeFolhas(No* no);
 
-void imprimeNivel(No* no, int n);
-
-int arvoresIguais(No* no1, No* no2);
-
-int ocorrencias(No* no, int n);
-
-///////////////////////////////////////////////////////////////////////////////
-
-Node *criarNode(int value);
-
-Lista *criarLista();
-
-int push(Lista *l, int value);
-
-void imprimeLista(Lista* lista);
-
-///fixação 2
-int abIsFull (No* no);
-
-int abIsFullAux(No* no, int full);
-
-int abpNumNodesHeightH(No* no);
-
-int addInv(No *no, int n);
+//void imprimeNivel(No* no, int n);
 
 int altura(No* no);
 
-void espelharAux(No* no, No* ret, int n);
-
-No* espelhar(No* no);
 
 
 

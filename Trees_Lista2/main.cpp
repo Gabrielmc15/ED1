@@ -40,20 +40,7 @@ int main(){
     add(arv, 45);
     add(arv, 60);
 
-    No* espelho = espelhar(arv);
-
-
-    cout << "\n                      ";
-    imprimeNivel(espelho, 0);
-    cout << "\n                    ";
-    imprimeNivel(espelho, 1);
-    cout << "\n                  ";
-    imprimeNivel(espelho, 2);
-    cout << "\n            ";
-    imprimeNivel(espelho, 3);
-    cout << "\n  ";
-    imprimeNivel(espelho, 4);
-
+    cout << abpNumNodesHeightH(arv);
     return 0;
 }
 
