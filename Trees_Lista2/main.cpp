@@ -40,7 +40,21 @@ int main(){
     add(arv, 45);
     add(arv, 60);
 
-    cout << abpNumNodesHeightH(arv);
+
+    // Questao 2 da imagem: questao2
+
+    cout << "Questao 3:Faca um algoritmo que recebe a raiz de uma arvore binaria e retorna o numero de elementos da arvore que tem altura h\n";
+    cout << "Numero de elementos: " << abpNumNodesHeightH(arv) << "\n";
+
+    cout << "Questao 4:espelhar uma arvore\n";
+
+    No* espelho = espelhar(arv);
+
+    for(int i=0; i<= altura(espelho); i++){
+        imprimeNivel(espelho, i);
+        cout << "\n";
+    }
+
     return 0;
 }
 
