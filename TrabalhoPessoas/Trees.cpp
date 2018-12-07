@@ -111,6 +111,8 @@ int addNomes(Nomes **nomes, Colaborador *col){
     }
 }
 
+
+
 /*int addEntradas(Entradas **entradas, Colaborador *col){
     if(*entradas == NULL){
         *entradas = new Entradas;
