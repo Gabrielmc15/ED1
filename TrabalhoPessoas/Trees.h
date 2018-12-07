@@ -1,89 +1,139 @@
 using namespace std;
 
+/*Um laboratório de pesquisa deseja manter informações de seus colaboradores de maneira organizada e de fácil recuperação.
+A ideia é se poder cadastrar as informações dos colaboradores em múltiplas árvores que possam ser consultadas com múltiplus
+objetivos.
+A principio, as árvores terão apenas as informações de nome, matrícula, data de entrada e data de saida de cada colaborador.
+E as consultas deverão ser realizadas por nome, data de entrada, data de saída.
+As operações que devem ser implementadas:
+- cadastro de colaborador
+- edição de colaborador
+- consulta de colaborador --> por 1 dos critérios
+* Você deverá ter 1 árvore para cada parâmetro de consulta
+** Mas não deve ser alocado um novo colaborador para cada árvore. O mesmo deve ser compartilhado.
+*/
+
 typedef struct _Data_{
     int dia;
     int mes;
     int ano;
 }Data;
-typedef struct _No_{
-    //nome, matrícula, data de entrada e data de saida
-    string nome;
+
+typedef struct _Colaborador_{
     int matricula;
-    Data entrada; // vai ser struct
-    Data saida; // vai ser struct
-    _No_ *esq, *dir, *pai;
-}No;
-
-typedef struct _node_{
-    int dado;
-    _node_ *prox;
-} Node;
-
-typedef struct _lista_{
-    Node *cab;
-    Node *ult;
+    string nome;
+    Data *entrada;
+    Data *saida;
     int qtd;
-} Lista;
+}Colaborador;
 
+typedef struct _Nomes_{
+    //nome, matrícula, data de entrada e data de saida
+    Colaborador *col;
+    _Nomes_ *esq, *dir, *pai;
+}Nomes;
+
+typedef struct _Entradas_{
+    //nome, matrícula, data de entrada e data de saida
+    Colaborador *col;
+    _Entradas_ *esq, *dir, *pai;
+}Entradas;
+
+typedef struct _Saidas_{
+    //nome, matrícula, data de entrada e data de saida
+    Colaborador *col;
+    //Dados* col;
+    _Saidas_ *esq, *dir, *pai;
+}Saidas;
+
+Data *data(int dia, int mes, int ano);
+
+void printData(Data *data);
+
+int dataComp(Data *data1, Data *data2);
+
+Colaborador *Criar(string nome, Data *entrada, Data *saida);
+
+Saidas *criarSaidas(Colaborador *col);
+
+Entradas *criarEntradas(Colaborador *col);
+
+Nomes *criarNomes(Colaborador *col);
+
+int addNomes(Nomes **nomes, Colaborador *col);
+
+int addEntradas(Entradas *entrada, Colaborador *col);
+
+int addSaidas(Saidas *saida, Colaborador *col);
+
+int add(Colaborador *col);
 
 /**
-No *criarNo(int n)- cria uma arvore
+Arv *criarArv(int n)- cria uma arvore
 @param n- inteiro que sera a raiz da arvore
 @return uma arvore alocada
 */
-No *criarNo(string nome, int matricula, Data entrada, Data saida);
+
+//Arv *criarArv(string nome, int matricula, Data entrada, Data saida);
+
+
+/** \brief
+ *
+ * \param arv Arv*
+ * \param nome string
+ * \param matricula int
+ * \param entrada Data
+ * \param saida Data
+ * \return int
+ *
+ */
+//int add(Arv *arv, string nome, int matricula, Data entrada, Data saida);
 
 /**
-int add(No* no, int n)- adiciona um dado em uma arvore ja alocada
-@param *no- a arvore em que deseja adicionar
-@param n-o dado que sera adicionado na arvore
-@return- 1 sucesso, 0 falha
+void emOrdem(Arv* arv)- imprime a arvore em ordem crescente
+@param *arv- a arvore que deseja imprimir
 */
-int add(No *no, string nome, int matricula, Data entrada, Data saida);
+//void preOrdem(Arv* arv);
+//void emOrdem(Arv* arv);
+//void posOrdem(Arv* arv);
 
 /**
-void emOrdem(No* no)- imprime a arvore em ordem crescente
-@param *no- a arvore que deseja imprimir
+Arv *minimo(Arv* arv)- retorna o menor dado da arvore(ultimo a esquerda)
+@param *arv- arvore
+@return- arv que contem o menor dado
 */
-//void emOrdem(No* no);
+//Arv *minimo(Arv* arv);
 
 /**
-No *minimo(No* no)- retorna o menor dado da arvore(ultimo a esquerda)
-@param *no- arvore
-@return- no que contem o menor dado
+Arv *maximo(Arv* arv)- retorna o maior dado da arvore(ultimo a direita)
+@param *arv- arvore
+@return- arv que contem o menor dado
 */
-No *minimo(No* no);
+//Arv* maximo(Arv* arv);
 
 /**
-No *maximo(No* no)- retorna o maior dado da arvore(ultimo a direita)
-@param *no- arvore
-@return- no que contem o menor dado
-*/
-No* maximo(No* no);
-
-/**
-int remover(No* no, int n)- remove o dado da arvore
-@param *no- arvore
+int remover(Arv* arv, int n)- remove o dado da arvore
+@param *arv- arvore
 @param n- dado a ser removido
 @return- 1 sucesso, 0 falha
 */
-//int remover(No* no, int n);
+//int remover(Arv* arv, int n);
 
 /**
-No *busca(No* no, int n)-funcao de busca na arvore
-@param *no- arvore
+Arv *busca(Arv* arv, int n)-funcao de busca na arvore
+@param *arv- arvore
 @param n- o valor que deseja buscar
-@return- o no com o dado da busca em caso de sucesso, NULL em caso de falha
+@return- o arv com o dado da busca em caso de sucesso, NULL em caso de falha
 */
-No *buscaMatricula(No* no,int matricula);
+//Arv *buscaMatricula(Arv* arv,int matricula);
 
 ///funcoes das atividades//////////////////////////////////////////////////////
 
-//void imprimeFolhas(No* no);
+//void imprimeFolhas(Arv* arv);
 
-//void imprimeNivel(No* no, int n);
+//void imprimeNivel(Arv* arv, int n);
 
-int altura(No* no);
+//int altura(Arv* arv);
 
 
 

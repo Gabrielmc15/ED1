@@ -1,144 +1,186 @@
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
 #include "Trees.h"
 
 using namespace std;
 
-No *criarNo(string nome, int matricula, Data entrada, Data saida){
-    No* ret = new No;
-    ret->nome = nome;
-    ret->matricula = matricula;
-    ret->entrada = entrada;
-    ret->saida = saida;
-    ret->dir = NULL;
-    ret->esq = NULL;
-    ret->pai = NULL;
+Data *data(int dia, int mes, int ano){
+    Data *ret = new Data;
+    ret->dia = dia;
+    ret->mes = mes;
+    ret->ano = ano;
     return ret;
 }
 
-int add(No *no, string nome, int matricula, Data entrada, Data saida){
-    if(no != NULL){
-        if(matricula < no->matricula){
-            //continua a funcao aqui adiciona na esquerda
-            if(no->esq == NULL){
-                no->esq = criarNo( nome, matricula, entrada, saida);
-                no->esq->pai = no;
-                return 1;
-            }
-            else
-                return add(no->esq, nome, matricula, entrada, saida);
-        }
-        if(matricula >= no->matricula){
-            //continua a funcao aqui adiciona na direita
-            if(no->dir == NULL){
-                no->dir = criarNo(nome, matricula, entrada, saida);
-                no->dir->pai = no;
-                return 1;
-            }
-            else
-                return add(no->dir, nome, matricula, entrada, saida);
-        }
+
+void printData(Data *data){
+    if(data != NULL){
+        cout << data->dia << "/" << data->mes << "/" << data->ano;
     }
-    criarNo(nome, matricula, entrada, saida);
-    return 1;
 }
 
-/*void emOrdem(No* no){
-    if(no != NULL && no->dado != NULL){
-        emOrdem(no->esq);
-        cout << no->dado << " ";
-        emOrdem(no->dir);
-    }
-}*/
-
-No *buscaMatricula(No* no,int matricula){
-    if(matricula < no->matricula)//esquerda
-        return buscaMatricula(no->esq, matricula);
-    if(matricula > no->matricula)//direita
-        return buscaMatricula(no->dir, matricula);
-    if(matricula == no->matricula)
-        return no;
-}
-
-No *minimo(No* no){
-    No* aux = no;
-    while(aux->esq != NULL)
-        aux = aux->esq;
-    return aux;
-}
-
-No* maximo(No* no){
-    No* aux = no;
-    while(aux->dir != NULL)
-        aux = aux->dir;
-    return aux;
-}
-
-/*int removerMatricula(No* no, int n){
-    if(no!= NULL){
-        No* aux = busca(no, n);
-        if(aux->dir == NULL && aux->esq == NULL){ //caso 1 nenhum filho
-            aux->dado = NULL;
-            aux = NULL;
+int dataComp(Data *data1, Data *data2){
+     if(data1 != NULL && data2 != NULL){
+        if(data1->ano <= data2->ano)
+            return -1;
+        if(data1->ano > data2->ano)
             return 1;
-        }
-        if(aux->dir == NULL && aux->esq != NULL){ //caso 2: 1 filho a esquerda
-            if(aux == aux->pai->esq){ //filho a esquerda do pai
-                aux->pai->esq = aux->esq;
-                aux->esq->pai = aux->pai;
-                aux = NULL;
-            }else if(aux == aux->pai->dir){ //filho a direi ta do pai
-                aux->pai->dir = aux->esq;
-                aux->esq->pai = aux->pai;
-                aux = NULL;
-            }
-        }else if(aux->esq == NULL && aux->dir != NULL){ //caso 2: 1 filho a direita
-            if(aux == aux->pai->esq){ //filho a esquerda do pai
-                aux->pai->esq = aux->dir;
-                aux->dir->pai = aux->pai;
-                aux = NULL;
-            }else if(aux == aux->pai->dir){ // filho a direita do pai
-                aux->pai->dir = aux->dir;
-                aux->dir->pai = aux->pai;
-                aux = NULL;
+        if(data1->ano == data2->ano){
+            if(data1->mes <= data2->mes)
+                return -1;
+            if(data1->mes > data2->mes)
+                return 1;
+            if(data1->mes == data2->mes){
+                if(data1->dia <= data2->dia)
+                    return -1;
+                if(data1->dia > data2->dia)
+                    return 1;
+                if(data1->dia == data2->dia)
+                    return 0;
             }
         }
-        if(aux->dir != NULL && aux->esq != NULL){// caso 3: tem 2 filhos (menor valor do da direita)
-            int aux2 = minimo(aux->dir)->dado;
-            remover(no, aux2);
-            aux->dado = aux2;
-        }
+    }
+}
+
+Saidas *criarSaidas(Colaborador *col){
+    Saidas *ret = new Saidas;
+    ret->col = col;
+    ret->dir = NULL;
+    ret->esq = NULL;
+    ret->pai = NULL;
+}
+
+Entradas *criarEntradas(Colaborador *col){
+    Entradas *ret = new Entradas;
+    ret->col = col;
+    ret->dir = NULL;
+    ret->esq = NULL;
+    ret->pai = NULL;
+}
+
+Nomes *criarNomes(Colaborador *col){
+    Nomes *ret = new Nomes;
+    ret->col = col;
+    ret->dir = NULL;
+    ret->esq = NULL;
+    ret->pai = NULL;
+}
+
+Colaborador *Criar(string nome, Data *entrada, Data *saida){
+    srand(time(NULL));
+    Colaborador *ret = new Colaborador;
+    ret->nome = nome;
+    ret->entrada = entrada;
+    ret->saida = saida;
+    ret->matricula = rand()% 1001 + 1000;
+    return ret;
+}
+
+int addNomes(Nomes **nomes, Colaborador *col){
+    if(*nomes == NULL){
+        *nomes = new Nomes;
+        (*nomes)->col = col;
+        (*nomes)->esq = NULL;
+        (*nomes)->dir = NULL;
+        (*nomes)->pai = NULL;
+        cout << "adicionei no nulo\n";
         return 1;
     }
-    return 0;
-}*/
-
-/*void imprimeFolhas(No* no){    ///funçao da atividade: questao 1
-    if(no != NULL){
-        imprimeFolhas(no->esq);
-        if(no->esq == NULL && no->dir == NULL)
-            //cout << no->dado << " ";
-        imprimeFolhas(no->dir);
+    if(*nomes != NULL){
+        if(col->nome <= (*nomes)->col->nome){
+            if((*nomes)->esq == NULL){
+                (*nomes)->esq = criarNomes(col);
+                (*nomes)->esq->pai = *nomes;
+                cout << "adicionei na esquerda\n";
+                return 1;
+            }
+            else
+                return addNomes((&(*nomes)->esq), col);
+        }
+        if(col->nome > (*nomes)->col->nome){
+            if((*nomes)->dir == NULL){
+                (*nomes)->dir = criarNomes(col);
+                (*nomes)->dir->pai = *nomes;
+                cout << "adicionei na direita\n";
+                return 1;
+            }
+            else
+                return addNomes((&(*nomes)->dir), col);
+        }
     }
-}*/
-
-/*void imprimeNivel(No* no, int n){       ///funçao da atividade: questao 2
-    if(no != NULL){
-        //if(n == 0)
-            //cout << no->dado << " ";
-        imprimeNivel(no->esq, n-1);
-        imprimeNivel(no->dir, n-1);
-    }
-}*/
-
-int altura(No* no){
-    if (no == NULL)
-      return -1; // altura da árvore vazia
-    else {
-      int he = altura (no->esq);
-      int hd = altura (no->dir);
-      if (he < hd) return hd + 1;
-      else return he + 1;
-   }
 }
 
+/*int addEntradas(Entradas **entradas, Colaborador *col){
+    if(*entradas == NULL){
+        *entradas = new Entradas;
+        (*entradas)->col = col;
+        (*entradas)->esq = NULL;
+        (*entradas)->dir = NULL;
+        (*entradas)->pai = NULL;
+        cout << "adicionei no nulo\n";
+        return 1;
+    }
+    if(*entradas != NULL){
+        if(dataComp(col->entrada, (*entradas)->col->entrada) <= 0)){ // erro qui
+            if((*entradas)->esq == NULL){
+                (*entradas)->esq = criarEntradas(col);
+                (*entradas)->esq->pai = *entradas;
+                cout << "adicionei na esquerda\n";
+                return 1;
+            }
+            else
+                return addEntradas((&(*entradas)->esq), col);
+        }
+        if(dataComp(col->entrada, (*entradas)->col->entrada) > 0)){
+            if((*entradas)->dir == NULL){
+                (*entradas)->dir = criarEntradas(col);
+                (*entradas)->dir->pai = *entradas;
+                cout << "adicionei na direita\n";
+                return 1;
+            }
+            else
+                return addEntradas((&(*entradas)->dir), col);
+        }
+    }
+}
+
+int addSaidas(Saidas **entradas, Colaborador *col){
+    if(*entradas == NULL){
+        *entradas = new Entradas;
+        (*entradas)->col = col;
+        (*entradas)->esq = NULL;
+        (*entradas)->dir = NULL;
+        (*entradas)->pai = NULL;
+        cout << "adicionei no nulo\n";
+        return 1;
+    }
+    if(*entradas != NULL){
+        if(dataComp(col->entrada, (*entradas)->col->entrada <= 0)){
+            if((*entradas)->esq == NULL){
+                (*entradas)->esq = criarEntradas(col);
+                (*entradas)->esq->pai = *entradas;
+                cout << "adicionei na esquerda\n";
+                return 1;
+            }
+            else
+                return addEntradas((&(*entradas)->esq), col);
+        }
+        if(dataComp(col->entrada, (*entradas)->col->entrada > 0)){
+            if((*entradas)->dir == NULL){
+                (*entradas)->dir = criarEntradas(col);
+                (*entradas)->dir->pai = *entradas;
+                cout << "adicionei na direita\n";
+                return 1;
+            }
+            else
+                return addEntradas((&(*entradas)->dir), col);
+        }
+    }
+}
+
+
+
+int add(Colaborador *col){
+
+}*/

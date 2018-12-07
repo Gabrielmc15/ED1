@@ -1,8 +1,14 @@
 # depslib dependency file v1.0
-1543843334 source:c:\users\gabriel marques\documents\ed1\trabalhopessoas\main.cpp
+1544187402 source:c:\users\gabriel marques\documents\ed1\trabalhopessoas\main.cpp
 	<iostream>
 	<stdlib.h>
 	"Trees.h"
 
-1543844680 c:\users\gabriel marques\documents\ed1\trabalhopessoas\trees.h
+1544186755 c:\users\gabriel marques\documents\ed1\trabalhopessoas\trees.h
+
+1544187281 source:c:\users\gabriel marques\documents\ed1\trabalhopessoas\trees.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	"Trees.h"
 
