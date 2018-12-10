@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1544442218 source:c:\users\gabriel marques\documents\ed1\listalistas\lista.cpp
+	<iostream>
+	<stdlib.h>
+	"lista.h"
+
+1544442234 c:\users\gabriel marques\documents\ed1\listalistas\lista.h
+
+1544442222 source:c:\users\gabriel marques\documents\ed1\listalistas\main.cpp
+	<iostream>
+	<stdlib.h>
+	"lista.h"
+
